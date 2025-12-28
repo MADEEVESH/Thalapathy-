@@ -55,11 +55,17 @@ img{max-width:100%; display:block;}
 }
 
 .brand-badge{
-  width:36px; height:36px;
-  border-radius:12px;
-  background-img-url: "https://i.pinimg.com/originals/cf/17/df/cf17dfcafbc300d9d1ddc66df832883e.jpg";
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background: 
+    linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)),
+    url("https://i.pinimg.com/originals/cf/17/df/cf17dfcafbc300d9d1ddc66df832883e.jpg");
+  background-size: cover;
+  background-position: center;
   box-shadow: var(--shadow);
 }
+
 
 .navlinks{
   display:flex;
