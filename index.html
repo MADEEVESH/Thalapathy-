@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thalapathy Blog — Vijay Updates, Reviews & Moments</title>
+  <meta name="description" content="A clean, modern blog layout dedicated to Thalapathy Vijay: news, reviews, highlights, and fan moments." />
+
+  <style>
+    :root{
+      --bg:#0b0f19;
+      --panel:#10182a;
+      --panel2:#0f1726;
+      --text:#eaf0ff;
+      --muted:#a9b6d3;
+      --line:rgba(255,255,255,.12);
+      --radius:18px;
+      --shadow: 0 16px 40px rgba(0,0,0,.35);
+      --accent:#ffd166;
+      --accent2:#66d9ff;
+      --danger:#ff6b6b;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:
+        radial-gradient(1100px 550px at 18% 8%, rgba(102,217,255,.10), transparent 60%),
+        radial-gradient(1000px 520px at 80% 18%, rgba(255,209,102,.10), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .container{max-width:1180px; margin:0 auto; padding:22px;}
+    .card{
+      background: rgba(16,24,42,.78);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:50;
+      background: rgba(11,15,25,.78);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; text-decoration:none;
+      font-weight:900; letter-spacing:.3px;
+    }
+    .logo{
+      width:34px; height:34px; border-radius:10px;
+      background: linear-gradient(135deg, rgba(255,209,102,.95), rgba(102,217,255,.82));
+      box-shadow: var(--shadow);
+      flex:0 0 auto;
+    }
+    .nav{
+      display:flex; gap:10px; flex-wrap:wrap;
+      font-size:14px;
+    }
+    .nav a{
+      text-decoration:none;
+      color:var(--muted);
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+    }
+    .nav a:hover{border-color:var(--line); color:var(--text);}
+
+    /* Utility Bar */
+    .util{
+      margin-top:14px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .search{
+      display:flex; gap:10px; align-items:center;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(0,0,0,.14);
+      min-width: 280px;
+      flex:1;
+    }
+    .search input{
+      width:100%;
+      border:0;
+      outline:none;
+      background: transparent;
+      color: var(--text);
+      font-size:14px;
+    }
+    .chiprow{
+      display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end;
+    }
+    .chip{
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.12);
+      color:var(--muted);
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:12px;
+      text-decoration:none;
+    }
+    .chip:hover{color:var(--text); border-color: rgba(255,255,255,.22);}
+
+    /* Layout */
+    .layout{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1.65fr .85fr;
+      gap:16px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      .layout{grid-template-columns:1fr;}
+    }
+
+    /* Featured */
+    .featured{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      padding:14px;
+    }
+    @media (max-width: 780px){
+      .featured{grid-template-columns:1fr;}
+    }
+    .featured-media{
+      border-radius: 16px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      aspect-ratio: 16/10;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+    .featured-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .badge{
+      position:absolute;
+      top:12px; left:12px;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.38);
+      color: var(--text);
+      backdrop-filter: blur(8px);
+    }
+    .featured-body{
+      padding:6px 6px 6px 4px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .meta{
+      display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+      font-size:12px; color:var(--muted);
+    }
+    .dot{
+      width:6px; height:6px; border-radius:50%;
+      background: var(--accent);
+      display:inline-block;
+    }
+    h1{
+      margin:0;
+      font-size: clamp(22px, 2.6vw, 30px);
+      line-height:1.15;
+      letter-spacing:-.2px;
+    }
+    .excerpt{margin:0; color:var(--muted); font-size:14px;}
+    .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:4px;}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      text-decoration:none;
+      font-weight:800;
+      font-size:14px;
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(255,209,102,.95), rgba(102,217,255,.70));
+      border-color: transparent;
+      color: #0b0f19;
+    }
+    .btn:hover{transform: translateY(-1px);}
+
+    /* Blog Grid */
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      margin:14px 0 10px;
+    }
+    .section-head h2{margin:0; font-size:18px; letter-spacing:-.1px;}
+    .section-head p{margin:0; font-size:12px; color:var(--muted);}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 680px){
+      .grid{grid-template-columns:1fr;}
+    }
+
+    article.post{
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.12);
+      border-radius: 18px;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height: 100%;
+    }
+    .thumb{
+      width:100%;
+      aspect-ratio: 16/9;
+      background: rgba(0,0,0,.20);
+      border-bottom:1px solid var(--line);
+      display:flex; align-items:center; justify-content:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .label{
+      position:absolute;
+      top:12px; left:12px;
+      font-size:11px;
+      padding:6px 9px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.38);
+      color: var(--text);
+      backdrop-filter: blur(8px);
+    }
+    .post-body{padding:12px 12px 14px;}
+    .post-body h3{
+      margin:0 0 6px;
+      font-size:16px;
+      letter-spacing:-.1px;
+      line-height:1.25;
+    }
+    .post-body p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .post-footer{
+      margin-top:auto;
+      padding:12px;
+      border-top:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .read{
+      text-decoration:none;
+      font-weight:900;
+      color:var(--text);
+      border:1px solid var(--line);
+      padding:7px 10px;
+      border-radius: 12px;
+      background: rgba(0,0,0,.12);
+    }
+    .read:hover{border-color: rgba(255,255,255,.22);}
+
+    /* Sidebar */
+    .sidebar{display:flex; flex-direction:column; gap:14px;}
+    .box{padding:14px;}
+    .box h3{margin:0 0 8px; font-size:16px;}
+    .box p{margin:0; color:var(--muted); font-size:13px;}
+    .list{
+      margin:10px 0 0;
+      padding:0;
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .list a{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      text-decoration:none;
+      color:var(--muted);
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.12);
+      padding:10px 10px;
+      border-radius: 14px;
+    }
+    .list a:hover{color:var(--text); border-color: rgba(255,255,255,.22);}
+    .count{
+      font-size:12px;
+      color: var(--muted);
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding:3px 8px;
+      background: rgba(0,0,0,.14);
+      flex:0 0 auto;
+      align-self:center;
+    }
+
+    .form{
+      display:flex; gap:10px; flex-direction:column;
+      margin-top:10px;
+    }
+    .form input{
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.12);
+      color: var(--text);
+      border-radius: 14px;
+      padding:10px 12px;
+      outline:none;
+      font-size:14px;
+    }
+    .form button{
+      cursor:pointer;
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding:10px 12px;
+      font-weight:900;
+      background: rgba(0,0,0,.12);
+      color: var(--text);
+    }
+    .form button:hover{border-color: rgba(255,255,255,.22);}
+
+    /* Center media block (images + iframe) */
+    .media-row{
+      display:grid;
+      grid-template-columns: 1fr 1.4fr 1fr;
+      gap:12px;
+      padding:14px;
+    }
+    @media (max-width: 980px){
+      .media-row{grid-template-columns:1fr;}
+    }
+    .side-img{
+      width:100%;
+      aspect-ratio: 3/4;
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      overflow:hidden;
+    }
+    .side-img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .video-wrap{
+      width:100%;
+      aspect-ratio: 16/9;
+      border-radius: 16px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:#000;
+    }
+    iframe{width:100%; height:100%; border:0; display:block;}
+
+    /* Footer */
+    footer{
+      margin-top:18px;
+      padding:18px 0 30px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .foot{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="topbar">
+        <a class="brand" href="#top">
+          <span class="logo" aria-hidden="true"></span>
+          <span>Thalapathy Blog</span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="#featured">Featured</a>
+          <a href="#posts">Posts</a>
+          <a href="#media">Media</a>
+          <a href="#about">About</a>
+        </nav>
+      </div>
+
+      <div class="util">
+        <div class="search" role="search">
+          <span aria-hidden="true">🔎</span>
+          <input id="searchInput" type="search" placeholder="Search posts (UI only)..." />
+        </div>
+
+        <div class="chiprow" aria-label="Categories">
+          <a class="chip" href="#posts">News</a>
+          <a class="chip" href="#posts">Reviews</a>
+          <a class="chip" href="#posts">Throwbacks</a>
+          <a class="chip" href="#posts">Fan Moments</a>
+          <a class="chip" href="#posts">Music & Dance</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <!-- FEATURED -->
+    <section id="featured" class="card">
+      <div class="featured">
+        <div class="featured-media">
+          <!-- Replace with your own/licensed image -->
+          <span class="badge">Featured Story</span>
+          <img src="images/featured.jpg" alt="Featured image (replace this)" />
+        </div>
+
+        <div class="featured-body">
+          <div class="meta">
+            <span class="dot" aria-hidden="true"></span>
+            <span>Category: <b>News</b></span>
+            <span>•</span>
+            <span>Date: <b>28 Dec 2025</b></span>
+            <span>•</span>
+            <span>Read time: <b>4 min</b></span>
+          </div>
+
+          <h1>[Your Featured Headline Here]</h1>
+          <p class="excerpt">
+            Write a strong summary in 2–3 lines. No empty hype. If you can’t explain why this post matters,
+            it’s not worthy of being “featured.”
+          </p>
+
+          <div class="btnrow">
+            <a class="btn primary" href="#posts">Read posts</a>
+            <a class="btn" href="#media">Watch featured video</a>
+          </div>
+
+          <p class="excerpt" style="font-size:13px;">
+            Tip: Don’t publish with fake facts. Verify film names, dates, and awards before writing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CENTER MEDIA (images + iframe) -->
+    <section id="media" class="card" style="margin-top:16px;">
+      <div class="section-head" style="padding:14px 14px 0;">
+        <h2>Center Stage</h2>
+        <p>Left image • iframe video • Right image (responsive)</p>
+      </div>
+
+      <div class="media-row">
+        <div class="side-img">
+          <img src="images/vijay-left.jpg" alt="Thalapathy Vijay photo (left)" />
+        </div>
+
+        <div class="video-wrap" aria-label="Featured video">
+          <!-- Replace VIDEO_IFRAME_SRC_HERE with a real embed URL -->
+          <iframe
+            src="VIDEO_IFRAME_SRC_HERE"
+            title="Thalapathy Vijay video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="side-img">
+          <img src="images/vijay-right.jpg" alt="Thalapathy Vijay photo (right)" />
+        </div>
+      </div>
+
+      <div style="padding:0 14px 14px; color:var(--muted); font-size:13px;">
+        If this is YouTube, use the <b>/embed/</b> format (not the normal watch link).
+        Example: https://www.youtube.com/embed/VIDEO_ID
+      </div>
+    </section>
+
+    <!-- MAIN LAYOUT -->
+    <div class="layout">
+      <!-- POSTS -->
+      <section id="posts">
+        <div class="section-head">
+          <h2>Latest Posts</h2>
+          <p>Clean grid layout — add real content</p>
+        </div>
+
+        <div class="grid" id="postGrid">
+          <!-- Post 1 -->
+          <article class="post" data-title="Top 10 Vijay performance moments" data-category="Throwbacks">
+            <div class="thumb">
+              <span class="label">Throwbacks</span>
+              <img src="images/post1.jpg" alt="Post image 1 (replace)" />
+            </div>
+            <div class="post-body">
+              <h3>Top 10 Performance Moments That Defined an Era</h3>
+              <p>
+                A sharp, curated list of moments that highlight craft, presence, and timing. Replace this
+                placeholder with your actual write-up.
+              </p>
+            </div>
+            <div class="post-footer">
+              <span>Read time: 5 min</span>
+              <a class="read" href="#">Read</a>
+            </div>
+          </article>
+
+          <!-- Post 2 -->
+          <article class="post" data-title="Film review: [Movie]" data-category="Reviews">
+            <div class="thumb">
+              <span class="label">Reviews</span>
+              <img src="images/post2.jpg" alt="Post image 2 (replace)" />
+            </div>
+            <div class="post-body">
+              <h3>Review: What Worked, What Didn’t, and Why It Matters</h3>
+              <p>
+                Don’t write fanboy nonsense. Review like an adult: pacing, writing, performance, direction,
+                music, and impact.
+              </p>
+            </div>
+            <div class="post-footer">
+              <span>Read time: 6 min</span>
+              <a class="read" href="#">Read</a>
+            </div>
+          </article>
+
+          <!-- Post 3 -->
+          <article class="post" data-title="Vijay dance analysis" data-category="Music & Dance">
+            <div class="thumb">
+              <span class="label">Music & Dance</span>
+              <img src="images/post3.jpg" alt="Post image 3 (replace)" />
+            </div>
+            <div class="post-body">
+              <h3>Dance Breakdown: Why His Choreography Hits Different</h3>
+              <p>
+                Explain rhythm, clarity, repeatability, and screen framing. If you only say “mass,” your
+                blog is lazy.
+              </p>
+            </div>
+            <div class="post-footer">
+              <span>Read time: 4 min</span>
+              <a class="read" href="#">Read</a>
+            </div>
+          </article>
+
+          <!-- Post 4 -->
+          <article class="post" data-title="Fan moments compilation" data-category="Fan Moments">
+            <div class="thumb">
+              <span class="label">Fan Moments</span>
+              <img src="images/post4.jpg" alt="Post image 4 (replace)" />
+            </div>
+            <div class="post-body">
+              <h3>Fan Moments: The Energy That Makes Theaters Explode</h3>
+              <p>
+                Capture atmosphere, not cringe. Add real stories, dates, and locations if you can verify them.
+              </p>
+            </div>
+            <div class="post-footer">
+              <span>Read time: 3 min</span>
+              <a class="read" href="#">Read</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar" id="about">
+        <section class="card box">
+          <h3>About This Blog</h3>
+          <p>
+            A focused tribute blog for Thalapathy Vijay: updates, reviews, throwbacks, and curated moments.
+            Keep it credible. No made-up achievements.
+          </p>
+        </section>
+
+        <section class="card box">
+          <h3>Categories</h3>
+          <ul class="list">
+            <li><a href="#posts"><span>News</span><span class="count">8</span></a></li>
+            <li><a href="#posts"><span>Reviews</span><span class="count">5</span></a></li>
+            <li><a href="#posts"><span>Throwbacks</span><span class="count">12</span></a></li>
+            <li><a href="#posts"><span>Fan Moments</span><span class="count">7</span></a></li>
+            <li><a href="#posts"><span>Music & Dance</span><span class="count">6</span></a></li>
+          </ul>
+          <p style="margin-top:10px; color:var(--muted); font-size:12px;">
+            Counts are placeholders. Update them or remove them.
+          </p>
+        </section>
+
+        <section class="card box">
+          <h3>Subscribe</h3>
+          <p>Front-end only. Connect it to a backend later if you want it real.</p>
+          <form class="form" onsubmit="return false;">
+            <input type="email" placeholder="Email address" required />
+            <button type="submit">Subscribe</button>
+          </form>
+        </section>
+
+        <section class="card box">
+          <h3>Disclaimer</h3>
+          <p style="color:var(--muted); font-size:12px;">
+            Use licensed images and official video embeds. Don’t steal posters and reuploads, then blame “the internet”
+            when it gets removed.
+          </p>
+        </section>
+      </aside>
+    </div>
+
+    <footer>
+      <div class="foot">
+        <div>
+          <b style="color:var(--text);">Thalapathy Blog</b><br />
+          <span>Single-file HTML template</span>
+        </div>
+        <div>
+          © <span id="year"></span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // UI-only search filter (no backend). Filters visible cards.
+    const input = document.getElementById("searchInput");
+    const posts = Array.from(document.querySelectorAll("article.post"));
+
+    input.addEventListener("input", () => {
+      const q = input.value.trim().toLowerCase();
+      posts.forEach(p => {
+        const title = (p.getAttribute("data-title") || "").toLowerCase();
+        const category = (p.getAttribute("data-category") || "").toLowerCase();
+        const text = (p.innerText || "").toLowerCase();
+        const hit = !q || title.includes(q) || category.includes(q) || text.includes(q);
+        p.style.display = hit ? "" : "none";
+      });
+    });
+  </script>
+</body>
+</html>
