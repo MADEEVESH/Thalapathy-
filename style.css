@@ -383,6 +383,41 @@ img{max-width:100%; display:block;}
   color: var(--muted);
 }
 
+.reel-card{
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.reel-wrap{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #000;
+}
+
+.reel-wrap blockquote{
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+}
+
+.instagram-media{
+  min-width: 100% !important;
+}
+
+.reel-caption{
+  padding: 12px;
+  text-align: center;
+}
+
+.reel-title{
+  font-weight: 900;
+}
+
+
+
 @media (max-width: 900px){
   .hero-grid{grid-template-columns: 1fr;}
   .grid-3{grid-template-columns: 1fr;}
